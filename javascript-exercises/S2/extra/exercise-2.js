@@ -32,14 +32,18 @@ const users = [
         }
     },
 ]
-/* let arraySonidos= new Array;
-let sumaVolume = 0;
-let totalSonidos = 0;
-let mediaVolumen = sumaVolume/totalSonidos;
 
-console.log(arraySonidos);
-console.log('La suma de todos los volúmenes es:',sumaVolume);
-console.log('El total de sonidos es:',totalSonidos);
-console.log('La media del volumen es:',mediaVolumen); */
+ let sumaVolume = 0;
+ let elementos = 0;
 
-/* Preguntar en clase */
+for (let user of users){
+    for (let key in user.favoritesSounds){
+        sumaVolume += user.favoritesSounds[key].volume;   
+        elementos++;
+    }
+}
+
+let mediaVolumen = sumaVolume/elementos;
+
+console.log('la suma de los volume es: ',sumaVolume);
+console.log('La media del volumen es:',mediaVolumen); 
