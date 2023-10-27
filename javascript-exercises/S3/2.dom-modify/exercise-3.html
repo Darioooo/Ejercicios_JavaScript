@@ -1,0 +1,30 @@
+<!-- Inserta dinamicamente en un html un div que contenga 6 p utilizando un loop con javascript. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var crearDiv = document.createElement('div');
+        crearDiv.style.width = "300px";
+        crearDiv.style.height = "400px";
+        crearDiv.style.backgroundColor = "aquamarine";
+        document.body.appendChild(crearDiv);
+        let myP;
+        for (let i=0; i<6; i++){
+            myP = document.createElement("p");
+            myP.innerHTML = "yo soy un parrafo";
+            crearDiv.appendChild(myP);
+        }
+        
+        
+});
+    </script>
+</body>
+</html>
