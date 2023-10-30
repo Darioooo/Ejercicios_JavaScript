@@ -15,7 +15,11 @@ Dado el siguiente html usa querySelector para mostrar por consola todos los elem
     <h4 class="pokemon">Squirtle</h4>
 
     <script>
-        document.querySelectorAll('.pokemon');
+        let myH = document.querySelectorAll('.pokemon');
+        myH.forEach(i => {
+            console.log(i);
+            
+        });
     </script>
 </body>
 </html>

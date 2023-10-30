@@ -1,7 +1,7 @@
-# Español
+<!-- # Español
 Dado el siguiente html usa querySelector para mostrar por consola el 3 personaje con el atributo data-function="testMe".
 
-```html
+```html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,8 +16,8 @@ Dado el siguiente html usa querySelector para mostrar por consola el 3 personaje
     <span data-function="testMe">Morty</span>
     
     <script>
-        document.querySelector('span[data-funtion=testMe]');
+        let mySpan = document.querySelectorAll('span[data-function=testMe]');
+        console.log(mySpan[3]);
     </script>
 </body>
 </html>
-```

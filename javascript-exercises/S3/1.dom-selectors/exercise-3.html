@@ -15,7 +15,10 @@ Dado el siguiente html usa querySelector para mostrar por consola todos los p
     <p>Soy el power ranger Azul</p>
     <p>Soy el power ranger Negro</p>
     <script>
-        document.querySelectorAll('p');
+        let myP = document.querySelectorAll('p');
+        for (let i=0; i< myP.length; i++ ){
+            console.log(myP[i]);
+        }
     </script>
 </body>
 </html>

@@ -15,7 +15,10 @@ Dado el siguiente html usa querySelector para mostrar por consola todos los elem
     <span data-function="testMe">Rick</span>
     <span data-function="testMe">Morty</span>
     <script>
-        document.querySelectorAll("span[data-funtion=testMe]");
+        let mySpan = document.querySelectorAll("span[data-function=testMe]");
+        mySpan.forEach(i => {
+            console.log(i);     
+        });
     </script>
 </body>
 </html>
