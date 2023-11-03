@@ -1,0 +1,29 @@
+table{
+    caption-side: top;
+    border: rgb(0, 0, 0) 5px solid;
+    table-layout: auto;
+    border-collapse: collapse;
+    border-spacing: none;
+    width: 700px;
+    height: 200px;
+}
+
+table th{
+    border: black 4px solid;
+    height: 50px;
+    font-size: 22px;
+}
+
+table td{
+    border: black 2px solid;
+    margin: 2px;
+    padding: 2px;
+    height: 30px;
+    text-align: center;
+    font-size: 18px;
+}
+
+
+tr:hover{
+    background-color: rgba(0, 255, 140, 0.704);
+}
