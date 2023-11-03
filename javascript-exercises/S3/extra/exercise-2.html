@@ -1,6 +1,5 @@
-Basandote en el html siguiente, elimina el elemento que tenga la clase .fn-remove-me.
+<!-- Basandote en el html siguiente, elimina el elemento que tenga la clase .fn-remove-me. -->
 
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +11,10 @@ Basandote en el html siguiente, elimina el elemento que tenga la clase .fn-remov
 
 <body>
     <p class="fn-remove-me">Bye bye</p>
+    <script>
+    let eliminar = document.querySelector('.fn-remove-me');
+    eliminar.remove();
+    </script>
 </body>
 
 </html>
-```

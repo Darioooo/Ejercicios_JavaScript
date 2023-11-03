@@ -1,0 +1,50 @@
+<!-- Basandote en el ejercicio anterior. Crea un botón para cada uno de los elementos de las listas que elimine ese mismo elemento del html. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        const countries = [
+            {title: 'Random title', imgUrl: 'https://picsum.photos/300/200?random=1'}, 
+            {title: 'Random title', imgUrl: 'https://picsum.photos/300/200?random=2'},
+            {title: 'Random title', imgUrl: 'https://picsum.photos/300/200?random=3'},
+            {title: 'Random title', imgUrl: 'https://picsum.photos/300/200?random=4'},
+            {title: 'Random title', imgUrl: 'https://picsum.photos/300/200?random=5'}];
+
+
+            let myList = document.createElement('ul');
+            document.body.appendChild(myList);   
+            
+            let btnDelete;
+            countries.forEach(element => {    
+            
+                let myDiv = document.createElement('div');
+                myList.appendChild(myDiv);
+
+                btnDelete = document.createElement('button');
+                btnDelete.addEventListener('click', function (event){                
+                    const divPadre = event.target.parentNode;  /* Accede al elemento padre (el div) del botón */                             
+                    divPadre.parentNode.removeChild(divPadre);  /* Elimina el div padre */
+                });
+                btnDelete.textContent = "borrar este div";
+                myDiv.appendChild(btnDelete);
+
+                let myTitle = document.createElement('h4');
+                myTitle.textContent = element.title;
+                myDiv.appendChild(myTitle);
+
+                let myImg = document.createElement('img');
+                myImg.src = element.imgUrl;
+                myDiv.appendChild(myImg);                
+            });
+
+            
+    </script>
+</body>
+</html>

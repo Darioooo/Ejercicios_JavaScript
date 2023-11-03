@@ -1,0 +1,45 @@
+<!-- Basandote en el ejercicio anterior. Crea un botón que elimine el último elemento de la lista. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        let btnDelete = document.createElement('button');
+            document.body.appendChild(btnDelete);
+            btnDelete.addEventListener('click', function (event){
+                /* countries.pop(); */ /* si quisiéramos borrarlo del array countries */
+                myList.removeChild(myList.lastChild); 
+                console.log(countries);
+            })
+
+        const countries = [
+            {title: 'Random title', imgUrl: 'https://picsum.photos/300/200?random=1'}, 
+            {title: 'Random title', imgUrl: 'https://picsum.photos/300/200?random=2'},
+            {title: 'Random title', imgUrl: 'https://picsum.photos/300/200?random=3'},
+            {title: 'Random title', imgUrl: 'https://picsum.photos/300/200?random=4'},
+            {title: 'Random title', imgUrl: 'https://picsum.photos/300/200?random=5'}];
+
+        let myList = document.createElement('ul');
+        document.body.appendChild(myList);   
+            
+            countries.forEach(element => {                
+                let myDiv = document.createElement('div');
+                myList.appendChild(myDiv);
+                let myTitle = document.createElement('h4');
+                myTitle.textContent = element.title;
+                myDiv.appendChild(myTitle);
+                let myImg = document.createElement('img');
+                myImg.src = element.imgUrl;
+                myDiv.appendChild(myImg);
+                console.log(element);
+            });
+
+    </script>
+</body>
+</html>
