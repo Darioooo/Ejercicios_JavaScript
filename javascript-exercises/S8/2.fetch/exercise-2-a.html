@@ -1,0 +1,39 @@
+<!-- Dado el siguiente javascript y html. Añade la funcionalidad necesaria usando fetch() para hacer una consulta a la api cuando se haga click en el botón, pasando como parametro de la api, el valor del input. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <button>Consultar</button>
+
+    <script>
+        
+        let myInput = document.querySelector('input[type="text"]');
+        
+        console.log(myInput.value);
+        let myButton = document.querySelector('button');
+        ;
+
+        myButton.addEventListener('click', () =>{
+            const baseUrl = `https://api.nationalize.io?name=${myInput.value}`
+            myInput.value = '';
+            const request = fetch(baseUrl)
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => new Error('no se han recogido los datos',error));
+        });
+
+
+    </script>
+</body>
+</html>
+
+
+
+

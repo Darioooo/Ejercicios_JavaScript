@@ -1,6 +1,5 @@
-Dado el siguiente array, haz la media de las notas de todos los examenes .reduce().
+/* Dado el siguiente array, haz la media de las notas de todos los examenes .reduce(). */
 
-```js
 const exams = [
     {name: 'Abel Cabeza Román', score: 5}, 
     {name: 'Maria Aranda Jimenez', score: 1}, 
@@ -13,4 +12,10 @@ const exams = [
     {name: 'Robert Kiyosaki', score: 2},
     {name: 'Keanu Reeves', score: 10}
 ];
-```
+
+sumaNotas = exams.reduce((acumulo, alumno) => acumulo + alumno.score,0);
+
+mediaNotas = sumaNotas/exams.length;
+
+console.log(sumaNotas);
+console.log(mediaNotas);

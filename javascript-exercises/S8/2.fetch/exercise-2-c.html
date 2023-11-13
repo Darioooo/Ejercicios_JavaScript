@@ -1,0 +1,57 @@
+<!-- En base al ejercicio anterior, crea un botón con el texto 'X' para cada uno de los p que hayas insertado y que si el usuario hace click en este botón eliminemos el parrafo asociado. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <button>Consultar</button>
+
+    <script>
+        
+        let myInput = document.querySelector('input[type="text"]');        
+        console.log(myInput.value);
+        let myButton = document.querySelector('button');
+               
+
+        myButton.addEventListener('click', () =>{
+            const baseUrl = `https://api.nationalize.io?name=${myInput.value}`
+            myInput.value = '';
+            const request = fetch(baseUrl)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.country);
+                    let createP = document.createElement('p');
+                    console.log(data.country[0].probability);
+                    let porcentaje = data.country[0].probability * 100;
+                    let porcentaje2 = data.country[1].probability * 100;
+                    let x = data.name;
+                    let y = data.country[0].probability * 100;
+                    y = y.toFixed(2);
+                    let y2 = data.country[1].probability * 100;
+                    y2 = y2.toFixed(2);
+                    let z = data.country[0].country_id;
+                    let z2 = data.country[1].country_id;
+                    createP.innerHTML = `El nombre ${x}, tiene un ${y}% de ser ${z}, y un ${y2}% de ser ${z2}`;
+                    document.body.appendChild(createP);
+
+                    let createButton = document.createElement('button');
+                    createButton.textContent = `Yo elimino a ${data.name}`;
+                    document.body.appendChild(createButton);
+
+                    createButton.addEventListener('click', function () {
+                        createP.remove(); // Eliminar el elemento p
+                        createButton.remove(); // Eliminar el botón
+                    });
+                }) 
+                .catch(error => new Error('no se han recogido los datos',error));
+        });
+
+
+    </script>
+</body>
+</html>
