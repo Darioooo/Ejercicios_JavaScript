@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>POKEMON</title>
+</head>
+<body>
+    <h1>POKÉDEX</h1>
+    <input type="text" placeholder="¡BUSCA TU POKEMON!">
+    <ol class="container_pokemons" id="pokedex"> </ol>;
+        
+    </div>
+    <script>
+        const pokeContainer = document.querySelector('.container_pokemons');
+
+        const catchPokemon = async (id) => {  
+                                  
+            try {          
+                const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+                const data = await response.json();
+                return data;               
+            } catch (error){   
+                console.log('Error de llamada a la API', error);        
+            }
+                       
+        };
+
+        const addPokemon = (data) => {
+            console.log('estamos dentro',data);        
+            if (data) {                              
+                    pokeContainer.innerHTML = "";
+                    for (pokemon of data){
+
+                        if (pokemon.id < 10) {
+                            pokeId = `#00${pokemon.id}`
+                        } else if (pokemon.id < 100) {
+                            pokeId = `#0${pokemon.id}`
+                        } else if (pokemon.id > 100) {
+                            pokeId = `#${pokemon.id}`
+                        };
+
+                        capitalizedPokeName = pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1); 
+                        capitalizedPokeType = pokemon.tipo.charAt(0).toUpperCase() + pokemon.tipo.slice(1); 
+
+                        let colorType;
+
+                        if (pokemon.tipo === 'poison') {
+                            colorType = 'rgba(245,0,245,0.8)';
+                        } else if (pokemon.tipo === 'normal') {
+                            colorType = 'rgba(255,236,201,0.8)';
+                        } else if (pokemon.tipo === 'fire') {
+                            colorType = 'rgba(255,0,0,0.8)';
+                        } else if (pokemon.tipo === 'water') {
+                            colorType = 'rgba(0,247,247,0.8)';
+                        } else if (pokemon.tipo === 'grass') {
+                            colorType = 'rgba(0,255,0,0.8)';
+                        } else if (pokemon.tipo === 'electric') {
+                            colorType = 'rgba(255,255,0,0.8)';
+                        } else if (pokemon.tipo === 'rock') {
+                            colorType = 'rgba(128,128,128,0.8)'
+                        } else if (pokemon.tipo === 'psychic') {
+                            colorType = 'rgba(174,49,174,0.8)'
+                        } else if (pokemon.tipo === 'bug') {
+                            colorType = 'rgba(48,86,32,0.8)'
+                        } else if (pokemon.tipo === 'ground') {
+                            colorType = 'rgba(135,68,33,0.8)'
+                        } else if (pokemon.tipo === 'dragon') {
+                            colorType = 'rgba(182,144,33,0.8)'
+                        } else if (pokemon.tipo === 'ice') {
+                            colorType = 'rgba(167,216,221,0.8)'
+                        } else if (pokemon.tipo === 'ghost') {
+                            colorType = 'rgba(157,40,66,0.8)'
+                        };
+                        const htmlStr = `
+                            <li class="Pokemon" style="background-color:${colorType}">
+                            <h2 class="poke-id">${pokeId}</h2>
+                            <img class="poke-img" src=${pokemon.imagen}>
+                            <div class="poke-data">
+                                <h3 class="poke-name"><strong></strong>${capitalizedPokeName}</h3>                        
+                                <h3 class="poke-type"><strong>Type: </strong> ${capitalizedPokeType}</h3> 
+                                                    
+                            </div>
+                            </li>`;
+
+                        pokeContainer.insertAdjacentHTML('beforeend', htmlStr);
+                        pokeContainer.style.opacity = 1;
+                    };                    
+            };
+        };
+
+        const MapPokemons = async () =>{
+            let id = 0;
+            let pokemons = [];
+            
+
+            for (let i = 1; i <= 151; i++) {
+                id++;
+                pokemons.push(await catchPokemon(id));                               
+            }
+
+            return pokemons.map((pokemon) => ({
+                nombre: pokemon.name,
+                id: pokemon.id,
+                tipo: pokemon.types[0].type.name,
+                imagen: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`               
+            }));
+
+        }          
+        
+        const drawPokemonSearched = (dataPokemons) => {
+            const input$$ = document.querySelector("input");
+            input$$.addEventListener("input", () => searchPokemons(dataPokemons, input$$.value));
+        }
+
+        const searchPokemons = (dataPokemons, dataToFilter) =>{
+            let filteredPokemon =  dataPokemons.filter((poke) => poke.nombre.toLowerCase().includes(dataToFilter.toLowerCase()));
+            addPokemon(filteredPokemon);
+        }
+        
+        const allPokemons = async ()  => {            
+            const dataPokemons = await MapPokemons();
+            addPokemon(dataPokemons);
+            drawPokemonSearched(dataPokemons);                  
+            
+        };
+        allPokemons();      
+    </script>
+</body>
+</html>
+
+
+
+
