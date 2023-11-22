@@ -4,128 +4,200 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora&family=Montserrat:wght@300&family=Open+Sans:ital,wght@0,300;1,800&family=Roboto+Condensed:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
     <title>POKEMON</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 <body>
-    <h1>POKÉDEX</h1>
+    
+    <div class=" title">
+        <h1 data-aos="fade-down-left"></h1>
+    </div>  
     <input type="text" placeholder="¡BUSCA TU POKEMON!">
-    <ol class="container_pokemons" id="pokedex"> </ol>;
-        
-    </div>
+    <div class="buttonsOfType"></div>
+    <ol class="container_pokemons" id="pokedex"> </ol>
+         
     <script>
+        AOS.init();
         const pokeContainer = document.querySelector('.container_pokemons');
-
-        const catchPokemon = async (id) => {  
-                                  
+        const buttonsOfType$$ = document.querySelector('.buttonsOfType');
+        const callPokeApibyId = async (id) => {                    
             try {          
                 const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
                 const data = await response.json();
                 return data;               
             } catch (error){   
-                console.log('Error de llamada a la API', error);        
-            }
-                       
+                return error = new Error(error);        
+            };      
         };
-
-        const addPokemon = (data) => {
-            console.log('estamos dentro',data);        
+        const callPokeApiByType = async () => {
+            try{
+                const response = await fetch(`https://pokeapi.co/api/v2/type`);
+                const data2 = await response.json();
+                return data2.results;
+            } catch(error){
+                return error = new Error(error);
+            };
+        }; 
+        const takeBackgroundForType = (type) =>{
+            const colorType = {
+                            normal: "url(https://images.wikidexcdn.net/mwuploads/wikidex/5/50/latest/20090407174646/EP361_Campo_del_Gimnasio_Arborada.jpg)",
+                            fire: "url(https://images2.alphacoders.com/286/286690.jpg)",
+                            water: "url(https://i.pinimg.com/474x/13/f7/9c/13f79c0b836d910508966fae8b97b5df.jpg)",
+                            grass: "url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG8-y70swe3g40RPZb6FY9KVVjtLs8wQyKSWWpjygJjS4W3agTDTzsJLKZ46Uv_7PGuDg&usqp=CAU)",
+                            electric: "url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4QosyJWxebyabSojQFrg8jiEO-n735AKQww&usqp=CAU)",
+                            rock: "url(https://img.freepik.com/vector-premium/relajante-paisaje-frio_24908-4926.jpg)",
+                            psychic: "url(https://img.freepik.com/vector-gratis/fondo-remolino-purpura-degradado_23-2149920059.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699488000&semt=ais)",
+                            bug: "url(/POKEAPI/img/background_bicho.jpg)",
+                            ground: "url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fe75f9c3-fdf7-4818-a734-6dc426ff4085/dd82nw5-32f9d406-056c-4d75-8d80-13cb142c84ce.png/v1/fill/w_1280,h_1024,q_80,strp/free_use_anime_background_8_by_mamamj63_dd82nw5-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTAyNCIsInBhdGgiOiJcL2ZcL2ZlNzVmOWMzLWZkZjctNDgxOC1hNzM0LTZkYzQyNmZmNDA4NVwvZGQ4Mm53NS0zMmY5ZDQwNi0wNTZjLTRkNzUtOGQ4MC0xM2NiMTQyYzg0Y2UucG5nIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.gYzRLkIFmMFrLsC4b6jXZLq9Qj_3iwbguAYHRrjHFp8)",
+                            ice: "url(https://thumbs.dreamstime.com/b/fondo-helado-del-hielo-24708855.jpg)",
+                            ghost: "url(https://img.freepik.com/fotos-premium/banner-fondo-fantasmas-flotantes-estetica-papel-tapiz_879987-4325.jpg)",
+                            poison: "url(https://img.freepik.com/vector-premium/arte-fluido-abstracto-creativo-efecto-marmol-liquido_632498-178.jpg)",
+                            dragon: "url(https://i.pinimg.com/736x/c2/45/d2/c245d25943813823e4386a22044bf732.jpg)",
+                            fighting:"url(https://image.spreadshirtmedia.net/image-server/v1/products/T1459A839PA4459PT28D185978912W10000H5728/views/1,width=378,height=378,appearanceId=839,backgroundColor=F2F2F2/dos-patadas-de-karate-voladores-o-patada-de-teca.jpg)"
+                        };
+            pokemonColor = colorType[type];
+            return pokemonColor;
+        }
+        const takeColorForType = (type) =>{
+            const colorType = {
+                            normal: "rgba(255,236,201,0.95)",
+                            fire: "rgba(230,10,10,0.95)",
+                            water: "rgba(0,247,247,0.95)",
+                            grass: "rgba(80,225,50,0.95)",
+                            electric: "rgba(255,255,0,0.95)",
+                            rock: "rgba(160,160,160,0.95)",
+                            psychic: "rgba(174,49,174,0.95)",
+                            bug: "rgba(180,222,86,0.95)",
+                            ground: "rgba(205,150,108,0.95)",
+                            ice: "rgba(167,216,221,0.95)",
+                            ghost: "rgba(157,40,66,0.95)",
+                            poison: "rgba(245,0,245,0.95)",
+                            dragon: "rgba(182,144,33,0.95)",
+                            fighting: "rgba(208,208,210,0.95)"
+                        };
+            pokemonColor = colorType[type];
+            return pokemonColor;
+        }
+        const sayPokemonForType = ()=>{
+            const textType = {
+                            normal: "¡¡Elígeme a mí!!",
+                            fire: "¡¡Reduciré todo a cenizas!!",
+                            water: "¡¡Hidro bomba!!",
+                            grass: "¡¡Látigo cepa!!",
+                            electric: "¡¡Ataque Rayo!!",
+                            rock: "¡¡Roca afilada!!",
+                            psychic: "¡¡Psico Rayo!!",
+                            bug: "¡¡Soy de tipo bicho!!",
+                            ground: "¡¡Cavar cavar!!",
+                            ice: "¡¡Ice ice baby!!",
+                            ghost: "¿¿Un susto de muerte??",
+                            poison: "Dicen que tengo, veneno en la piel",
+                            dragon: "¡¡El mejor tipo es DRAGON!!",
+                            fighting: "¡¡Patada puño!!",
+                            fairy: "¡¡Fairy, fairy!!"
+                        };                     
+                pokemonText = textType[pokemon.type];
+            return pokemonText;
+        };
+        const addPokemon = (data) => {        
             if (data) {                              
                     pokeContainer.innerHTML = "";
                     for (pokemon of data){
-
                         if (pokemon.id < 10) {
                             pokeId = `#00${pokemon.id}`
                         } else if (pokemon.id < 100) {
                             pokeId = `#0${pokemon.id}`
                         } else if (pokemon.id > 100) {
                             pokeId = `#${pokemon.id}`
-                        };
-
-                        capitalizedPokeName = pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1); 
-                        capitalizedPokeType = pokemon.tipo.charAt(0).toUpperCase() + pokemon.tipo.slice(1); 
-
-                        let colorType;
-
-                        if (pokemon.tipo === 'poison') {
-                            colorType = 'rgba(245,0,245,0.8)';
-                        } else if (pokemon.tipo === 'normal') {
-                            colorType = 'rgba(255,236,201,0.8)';
-                        } else if (pokemon.tipo === 'fire') {
-                            colorType = 'rgba(255,0,0,0.8)';
-                        } else if (pokemon.tipo === 'water') {
-                            colorType = 'rgba(0,247,247,0.8)';
-                        } else if (pokemon.tipo === 'grass') {
-                            colorType = 'rgba(0,255,0,0.8)';
-                        } else if (pokemon.tipo === 'electric') {
-                            colorType = 'rgba(255,255,0,0.8)';
-                        } else if (pokemon.tipo === 'rock') {
-                            colorType = 'rgba(128,128,128,0.8)'
-                        } else if (pokemon.tipo === 'psychic') {
-                            colorType = 'rgba(174,49,174,0.8)'
-                        } else if (pokemon.tipo === 'bug') {
-                            colorType = 'rgba(48,86,32,0.8)'
-                        } else if (pokemon.tipo === 'ground') {
-                            colorType = 'rgba(135,68,33,0.8)'
-                        } else if (pokemon.tipo === 'dragon') {
-                            colorType = 'rgba(182,144,33,0.8)'
-                        } else if (pokemon.tipo === 'ice') {
-                            colorType = 'rgba(167,216,221,0.8)'
-                        } else if (pokemon.tipo === 'ghost') {
-                            colorType = 'rgba(157,40,66,0.8)'
-                        };
+                        };                      
+                        capitalizedPokeName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1); 
+                        capitalizedPokeType = pokemon.type.charAt(0).toUpperCase() + pokemon.type.slice(1);
+                        
                         const htmlStr = `
-                            <li class="Pokemon" style="background-color:${colorType}">
-                            <h2 class="poke-id">${pokeId}</h2>
-                            <img class="poke-img" src=${pokemon.imagen}>
-                            <div class="poke-data">
-                                <h3 class="poke-name"><strong></strong>${capitalizedPokeName}</h3>                        
-                                <h3 class="poke-type"><strong>Type: </strong> ${capitalizedPokeType}</h3> 
-                                                    
-                            </div>
+                            <li class="pokemon" style="background-image:${takeBackgroundForType(pokemon.type)}">
+                                <div class="pokemon_bocadillo">
+                                    <div class="pokemon_bocadillo_contenedor">
+                                        <img src="/POKEAPI/img/bocadillo.png" alt="">
+                                        <p>${sayPokemonForType(pokemon)}</p>
+                                    </div>
+                                </div>
+                                <h2 class="poke-id">${pokeId}</h2>
+                                <h3 class="poke-name">${capitalizedPokeName}</h3>
+                                <img class="poke-img" src=${pokemon.img}>                     
+                                <h3 class="poke-type">${capitalizedPokeType}</h3>
                             </li>`;
-
                         pokeContainer.insertAdjacentHTML('beforeend', htmlStr);
                         pokeContainer.style.opacity = 1;
                     };                    
             };
         };
-
         const MapPokemons = async () =>{
             let id = 0;
-            let pokemons = [];
-            
-
+            let pokemons = [];          
             for (let i = 1; i <= 151; i++) {
                 id++;
-                pokemons.push(await catchPokemon(id));                               
-            }
-
+                pokemons.push(await callPokeApibyId(id));                               
+            };
             return pokemons.map((pokemon) => ({
-                nombre: pokemon.name,
+                name: pokemon.name,
                 id: pokemon.id,
-                tipo: pokemon.types[0].type.name,
-                imagen: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`               
+                type: pokemon.types[0].type.name,
+                img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`               
             }));
 
-        }          
-        
-        const drawPokemonSearched = (dataPokemons) => {
+        };    
+        const searchPokemonByName = (mappedPokemons) => {
             const input$$ = document.querySelector("input");
-            input$$.addEventListener("input", () => searchPokemons(dataPokemons, input$$.value));
-        }
-
-        const searchPokemons = (dataPokemons, dataToFilter) =>{
-            let filteredPokemon =  dataPokemons.filter((poke) => poke.nombre.toLowerCase().includes(dataToFilter.toLowerCase()));
+            input$$.addEventListener("input", () => filterPokemonsByName(mappedPokemons, input$$.value));
+        };        
+        const filterPokemonsByName = (mappedPokemons, dataToFilter) =>{
+            let filteredPokemon =  mappedPokemons.filter((poke) => poke.name.toLowerCase().includes(dataToFilter.toLowerCase()));
+            console.log(filteredPokemon);
             addPokemon(filteredPokemon);
-        }
-        
-        const allPokemons = async ()  => {            
-            const dataPokemons = await MapPokemons();
-            addPokemon(dataPokemons);
-            drawPokemonSearched(dataPokemons);                  
             
+        }; 
+        const takeTypes = (dataOfCallByTypes) => {            
+            let typesPokemon = [];
+            for (let i=0 ; i < dataOfCallByTypes.length - 4; i++){  /* No necesito algunos tipos que incluyen otras versiones o fairy que es uno */
+                typesPokemon.push(dataOfCallByTypes[i].name);
+            };
+            return typesPokemon;          
         };
-        allPokemons();      
+        const filterByTypes = (arrayTypesPokemon, mappedPokemons) => {
+            arrayTypesPokemon.forEach(type => {
+                var newButton$$ = document.createElement('button');
+                newButton$$.textContent = type;
+                newButton$$.className = `myType ${type}`;
+                newButton$$.style.backgroundColor = takeColorForType(type);
+                buttonsOfType$$.appendChild(newButton$$);
+            });
+            let filterPokemonByType = new Array();
+                let allOfButtons = document.querySelectorAll(".myType");
+                allOfButtons.forEach((button) =>{
+                    button.addEventListener("click", () => {                                                                   
+                    filterPokemonByType = mappedPokemons.filter((poke) => poke.type === button.textContent);
+                    addPokemon(filterPokemonByType);                                                      
+                    });
+                });
+            
+            
+        };      
+        const init = async ()  => {
+            const mappedPokemons = await MapPokemons();
+            addPokemon(mappedPokemons);
+            searchPokemonByName(mappedPokemons); 
+
+            const dataOfCallByTypes = await callPokeApiByType();
+            const arrayTypesPokemon = takeTypes(dataOfCallByTypes);
+            takeColorForType(dataOfCallByTypes);
+            filterByTypes(arrayTypesPokemon, mappedPokemons);
+
+        };
+        init();      
     </script>
 </body>
 </html>
