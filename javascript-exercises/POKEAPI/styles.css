@@ -67,11 +67,20 @@ input{
 }
 .buttonsOfType button:hover{
     cursor: pointer;
+    scale: 1.15;
+}
+.buttonsOfType button:active{
+    transform: translateY(3px);
+    scale: 1.15;
 }
 .container_pokemons {
-    display: block;
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: center;
     width: 85%;
-    margin: 0px auto;
+    margin: 0px;
+    margin-block-start: 0px;
+    padding-inline-start: 10px;
 }
 .pokemon {
     display:inline-block;
@@ -89,8 +98,6 @@ input{
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0.95;
-    
-
 }
 .pokemon:hover{
     scale: 1.1;
@@ -102,7 +109,7 @@ input{
     width: 90%;
     height: 90%;
     left: 5%;
-    top:5%;
+    top: -7%;
     transition: transform 0.2s ease-in;
     opacity: 0;
 }
@@ -111,7 +118,7 @@ input{
     position: absolute;
     width: 80%;
     height: 40%;
-    opacity: 0.9;
+    opacity: 1;
     top: 15%;
     left: 80%; 
 }
@@ -128,11 +135,12 @@ input{
     display: flex;
     position: absolute;
     font-family: 'Roboto Condensed', sans-serif;
+    text-align: center;
     width: 80%;
     font-size: 12px;
     font-weight: 900;
     top: -5%;
-    left: 8%;
+    left: 2%;
     transform: translate(-50%, -50%);
     margin: 0px;
 }
@@ -140,11 +148,7 @@ input{
     display: flex;
     scale: 1.1;
     opacity: 1;
-    /* .pokemon_bocadillo_contenedor{
-        transform: translate(65%, -65%);
-    }; */
 }
-
 .poke-name {
     display: block;
     width: 100%;
@@ -178,22 +182,20 @@ input{
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-@media (min-width:820px){
-    
-    
+@media (min-width:820px){   
     input{
         font-size: 28px;
     }
     .pokemon_bocadillo_contenedor p{
         font-size: 12px;
-        left: 6%;
+        left: 2%;
     }
     .pokemon_bocadillo:hover{
         display: flex;
         scale: 1.1;
         opacity: 1;
         .pokemon_bocadillo_contenedor{
-            transform: translate(5%, -30%);
+            transform: translate(5%, -40%);
         }
     }
 
