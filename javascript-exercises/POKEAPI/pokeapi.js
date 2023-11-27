@@ -43,7 +43,7 @@ const takeBackgroundForType = (type) =>{
                     electric: "url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4QosyJWxebyabSojQFrg8jiEO-n735AKQww&usqp=CAU)",
                     rock: "url(https://img.freepik.com/vector-premium/relajante-paisaje-frio_24908-4926.jpg)",
                     psychic: "url(https://img.freepik.com/vector-gratis/fondo-remolino-purpura-degradado_23-2149920059.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699488000&semt=ais)",
-                    bug: "url(img/background_bicho.jpg)",
+                    bug: "url(./img/background_bicho.jpg)",
                     ground: "url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fe75f9c3-fdf7-4818-a734-6dc426ff4085/dd82nw5-32f9d406-056c-4d75-8d80-13cb142c84ce.png/v1/fill/w_1280,h_1024,q_80,strp/free_use_anime_background_8_by_mamamj63_dd82nw5-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTAyNCIsInBhdGgiOiJcL2ZcL2ZlNzVmOWMzLWZkZjctNDgxOC1hNzM0LTZkYzQyNmZmNDA4NVwvZGQ4Mm53NS0zMmY5ZDQwNi0wNTZjLTRkNzUtOGQ4MC0xM2NiMTQyYzg0Y2UucG5nIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.gYzRLkIFmMFrLsC4b6jXZLq9Qj_3iwbguAYHRrjHFp8)",
                     ice: "url(https://thumbs.dreamstime.com/b/fondo-helado-del-hielo-24708855.jpg)",
                     ghost: "url(https://img.freepik.com/fotos-premium/banner-fondo-fantasmas-flotantes-estetica-papel-tapiz_879987-4325.jpg)",
@@ -134,7 +134,7 @@ const addPokemon = (data) => {
                     <li class="pokemon" style="background-image:${takeBackgroundForType(pokemon.type[0].type.name)}">
                         <div class="pokemon_bocadillo">
                             <div class="pokemon_bocadillo_contenedor">
-                                <img src="img/bocadillo.png" alt="">
+                                <img src="./img/bocadillo.png" alt="">
                                 <p>${sayPokemonForType(pokemon.type[0].type.name)}</p>
                             </div>
                         </div>

@@ -27,7 +27,7 @@ h1{
     margin: 0px 0px;
     padding: 0px;
     min-width: 300px;
-    background-image: url(img/pokedex_title.webp);
+    background-image: url(./img/pokedex_title.webp);
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
